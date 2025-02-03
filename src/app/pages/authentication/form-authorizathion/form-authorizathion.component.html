@@ -1,1 +1,30 @@
-<p>form-authorizathion works!</p>
+<form [formGroup]="SignInForm" novalidate (keydown)="handleKeyDown($event)">
+    <h1>Вход</h1>
+    <div class="inputGroup">
+      <p-floatLabel>
+        <input pInputText id="login" formControlName="login"/>
+        <label for="login">логин</label>
+      </p-floatLabel>
+      <br>
+      <p-floatLabel>
+        <input 
+        pInputText id="email" 
+        formControlName="email" 
+        />
+        <label for="email">Электронная почта</label>
+      </p-floatLabel>
+      <br>
+      <p-floatLabel>
+        <input 
+        pInputText id="password" 
+        formControlName="password"
+        />
+        <label for="password">Пароль</label>
+      </p-floatLabel>
+      <br>
+      <p-button
+        (buttonClick)="onSignIn()">
+        войти
+      </p-button>
+    </div>
+</form>

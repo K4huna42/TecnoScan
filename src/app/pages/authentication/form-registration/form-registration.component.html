@@ -1,1 +1,32 @@
-<p>form-registration works!</p>
+<form [formGroup]="SignUpForm" novalidate (keydown)="handleKeyDown($event)">
+    <h1>Регистрация</h1>
+    <div class="inputGroup">
+      <p-floatLabel>
+        <input pInputText id="login" formControlName="login" autocomplete="new-login" />
+        <label for="login">логин</label>
+      </p-floatLabel>
+      <br>
+      <p-floatLabel>
+        <input 
+        pInputText id="email" 
+        formControlName="email" 
+        autocomplete="new-email"
+        />
+        <label for="email">Электронная почта</label>
+      </p-floatLabel>
+      <br>
+      <p-floatLabel>
+        <input 
+        pInputText id="password" 
+        formControlName="password" 
+        autocomplete="new-password"
+        />
+        <label for="password">Пароль</label>
+      </p-floatLabel>
+      <br>
+      <button
+        (click)="onSignUp()">
+        Зарегистрироваться
+      </button>
+    </div>
+</form>

@@ -4,5 +4,7 @@ import { FormAuthorizathionComponent } from './pages/authentication/form-authori
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'auth', component: FormAuthorizathionComponent },
+    {
+        path: 'login', loadChildren: () => import('./pages/authentication/authentication.module').then(m => m.AuthenticationModule)
+    },
 ];
