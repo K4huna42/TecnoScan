@@ -7,4 +7,8 @@ export const routes: Routes = [
     {
         path: 'login', loadChildren: () => import('./pages/authentication/authentication.module').then(m => m.AuthenticationModule)
     },
+    {
+        path: ':UserId', loadChildren: () => import('./pages/personal-account/personal-account.module').then(m => m.PersonalAccountModule)
+    },
+
 ];

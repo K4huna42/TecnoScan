@@ -22,9 +22,8 @@ export class FormAuthorizathionComponent implements OnInit {
       private router: Router,
       private tokenService: TokenService,){
         this.SignInForm = this.fb.group({
-                login: ['', Validators.required],
-                email: ['', Validators.required],
-                password: ['', Validators.required],
+                UserLogin: ['', Validators.required],
+                UserPassword: ['', Validators.required],
               });
     }
 
@@ -38,16 +37,15 @@ export class FormAuthorizathionComponent implements OnInit {
     const formData = this.SignInForm.value;
 
     const data = {
-      Login: formData.login,
-      Email: formData.email,
-      Password: formData.password,
+      UserLogin: formData.UserLogin,
+      UserPassword: formData.UserPassword,
     }
 
     this.formAuthorizathionService.signIn(data).subscribe(
       (value) => {
-          this.tokenService.setToken(value.data.token);
-          this.router.navigate([`/${value.data.id}`]);
-          localStorage.setItem('VXNlcklk', value.data.id);
+          this.tokenService.setToken(value.token);
+          this.router.navigate([`/${value.userId}`]);
+          localStorage.setItem('VXNlcklk', value.userId);
           
       },
       (error) => {

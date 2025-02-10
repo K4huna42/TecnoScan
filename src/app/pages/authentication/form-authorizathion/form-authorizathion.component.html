@@ -2,29 +2,21 @@
     <h1>Вход</h1>
     <div class="inputGroup">
       <p-floatLabel>
-        <input pInputText id="login" formControlName="login"/>
-        <label for="login">логин</label>
+        <input pInputText id="UserLogin" formControlName="UserLogin"/>
+        <label for="UserLogin">логин</label>
       </p-floatLabel>
       <br>
       <p-floatLabel>
         <input 
-        pInputText id="email" 
-        formControlName="email" 
+        pInputText id="UserPassword" 
+        formControlName="UserPassword"
         />
-        <label for="email">Электронная почта</label>
+        <label for="UserPassword">Пароль</label>
       </p-floatLabel>
       <br>
-      <p-floatLabel>
-        <input 
-        pInputText id="password" 
-        formControlName="password"
-        />
-        <label for="password">Пароль</label>
-      </p-floatLabel>
-      <br>
-      <p-button
-        (buttonClick)="onSignIn()">
+      <button
+        (click)="onSignIn()">
         войти
-      </p-button>
+      </button>
     </div>
 </form>
