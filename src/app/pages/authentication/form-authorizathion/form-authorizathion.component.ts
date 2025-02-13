@@ -10,7 +10,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 @Component({
   selector: 'app-form-authorizathion',
   standalone: true,
-  imports: [ ReactiveFormsModule, FormsModule, FloatLabelModule, ButtonModule],
+  imports: [ ReactiveFormsModule, FormsModule, FloatLabelModule, ButtonModule,],
   templateUrl: './form-authorizathion.component.html',
   styleUrl: './form-authorizathion.component.scss'
 })
@@ -19,6 +19,7 @@ export class FormAuthorizathionComponent implements OnInit {
   SignInForm!: FormGroup;
   
   constructor(private fb: FormBuilder,private formAuthorizathionService: FormAuthorizathionService, 
+      private currentUserService: CurrentUserService,
       private router: Router,
       private tokenService: TokenService,){
         this.SignInForm = this.fb.group({
@@ -41,12 +42,16 @@ export class FormAuthorizathionComponent implements OnInit {
       UserPassword: formData.UserPassword,
     }
 
+    console.log('Login:', formData.UserLogin);
+    console.log('Password:', formData.UserPassword);
+
     this.formAuthorizathionService.signIn(data).subscribe(
       (value) => {
           this.tokenService.setToken(value.token);
           this.router.navigate([`/${value.userId}`]);
           localStorage.setItem('VXNlcklk', value.userId);
-          
+
+          this.currentUserService.setUserInf(formData.UserLogin, formData.UserPassword)
       },
       (error) => {
         console.log(error.error.message)
