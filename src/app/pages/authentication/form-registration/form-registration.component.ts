@@ -55,7 +55,7 @@ export class FormRegistrationComponent implements OnInit {
             console.log(value)
             this.currentUserService.saveUser(value.data);
             this.tokenService.setToken(value.token);
-            this.router.navigate([`/${value.userId}`]);
+            this.router.navigate([`/${value.id}`]);
             
         },
         (error) => {

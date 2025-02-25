@@ -50,8 +50,6 @@ export class FormAuthorizathionComponent implements OnInit {
           this.tokenService.setToken(value.token);
           this.router.navigate([`/${value.userId}`]);
           localStorage.setItem('VXNlcklk', value.userId);
-
-          this.currentUserService.setUserInf(formData.UserLogin, formData.UserPassword)
       },
       (error) => {
         console.log(error.error.message)

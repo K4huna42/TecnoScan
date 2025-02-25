@@ -29,9 +29,9 @@ export class FormDeleteComponent {
   
   this.currentUserService.deleteUser().subscribe(
     () => {
-      // localStorage.removeItem('YXV0aFRva2Vu');
-      // localStorage.removeItem('VXNlcklk');
-      // this.router.navigate(['/login']);
+      localStorage.removeItem('YXV0aFRva2Vu');
+      localStorage.removeItem('VXNlcklk');
+      this.router.navigate(['/login']);
     },
     (error) => {
       console.log(error.error.message)
