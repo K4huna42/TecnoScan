@@ -52,8 +52,7 @@ export class FormRegistrationComponent implements OnInit {
 
       this.formRegistrationService.signUp(data).subscribe(
         (value) => {
-            console.log(value)
-            this.currentUserService.saveUser(value.data);
+            // this.currentUserService.saveUser(value.data);
             this.tokenService.setToken(value.token);
             this.router.navigate([`/${value.id}`]);
             

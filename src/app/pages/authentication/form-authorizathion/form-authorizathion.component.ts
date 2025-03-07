@@ -42,8 +42,8 @@ export class FormAuthorizathionComponent implements OnInit {
       UserPassword: formData.UserPassword,
     }
 
-    console.log('Login:', formData.UserLogin);
-    console.log('Password:', formData.UserPassword);
+    // console.log('Login:', formData.UserLogin);
+    // console.log('Password:', formData.UserPassword);
 
     this.formAuthorizathionService.signIn(data).subscribe(
       (value) => {

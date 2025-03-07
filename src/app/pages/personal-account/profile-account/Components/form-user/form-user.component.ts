@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { CurrentUserService } from '../../../../../services/current-user.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormUserService } from './form-user.service';
+import { __values } from 'tslib';
 
 @Component({
   selector: 'app-form-user',
@@ -14,12 +16,12 @@ export class FormUserComponent implements OnInit {
   @Input() currentUser:any;
   login: string = '';
   email: string = '';
+  hasUpdated: boolean = false;
   userProfileForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private currentUserService:CurrentUserService){
-  }
-  ngOnInit(): void {
-    this.OnReceipt();
+  constructor(private fb: FormBuilder, 
+    private currentUserService:CurrentUserService,
+    private formUserService: FormUserService){
     this.userProfileForm = this.fb.group({
       login: [''],
       email: [''],
@@ -29,29 +31,60 @@ export class FormUserComponent implements OnInit {
       phone: [''],
     });
   }
+  
+  ngOnInit(): void {
+    this.formUserService.UpdatesTab$.subscribe((value => {
+      if(value == "personal")
+      {
+        this.currentUserService.getUser().subscribe(
+          (value) => {
+            this.login = value.user.login;
+            this.email = value.user.email;
+            sessionStorage.setItem('userLogin', this.login);
+            sessionStorage.setItem('userEmail', this.email);
+            console.log(this.login)
+            console.log(this.email)
+            this.formUserService.changeUpdate(" ")
+          },
+          (error) => {
+            console.log(error.error.message);
+          }
+        );
+      }
+      else
+      {
+        this.OnReceipt();
+      }
+    }));
+  }
 
   OnReceipt()
   {
     const storedLogin = sessionStorage.getItem('userLogin');
     const storedEmail = sessionStorage.getItem('userEmail');
-  
-    if (storedLogin && storedEmail) {
-      this.login = storedLogin;
-      this.email = storedEmail;
-    } 
-    else {
+
+    if (storedLogin == null && storedEmail == null) {
       this.currentUserService.getUser().subscribe(
         (value) => {
           this.login = value.user.login;
           this.email = value.user.email;
-  
           sessionStorage.setItem('userLogin', this.login);
           sessionStorage.setItem('userEmail', this.email);
+          console.log(this.login)
+          console.log(this.email)
+          
         },
         (error) => {
           console.log(error.error.message);
         }
-      );
+      );   
+    } 
+    else
+    {
+      this.login = storedLogin ?? '';
+      this.email = storedEmail ?? '';
+      console.log(this.login)
+      console.log(this.email)
     }
   }
 
@@ -70,6 +103,7 @@ export class FormUserComponent implements OnInit {
         next: (data) => {
           this.currentUser = data.data2;
           this.currentUserService.saveUser(data.data2);
+          this.formUserService.changeUpdate("personal")
         },
         error: (error) => {
           console.log(error.error.message);

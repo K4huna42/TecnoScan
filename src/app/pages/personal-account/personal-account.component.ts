@@ -14,14 +14,7 @@ export class PersonalAccountComponent implements OnInit{
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private currentUserService: CurrentUserService) { }
 
-  menuItems: any = {};
-
-  ngOnInit(): void {
-    this.menuItems = this.getMenuItems();
-  }
-
-  getMenuItems() {
-    return {
+  menuItems: any = {
         home: { 
             action: () => this.executeCommand('home') 
         },
@@ -35,7 +28,9 @@ export class PersonalAccountComponent implements OnInit{
         {
           action: () => this.executeCommand('exit') 
         }
-    };
+  };
+
+  ngOnInit(): void {
   }
   
   executeCommand(commandName: string): void {

@@ -18,6 +18,11 @@ export class CurrentUserService {
       sessionStorage.setItem(this.storageKey, JSON.stringify(user));
     }
   }
+
+  getUserSession(): any {
+    const data = sessionStorage.getItem(this.storageKey);
+    return data ? JSON.parse(data) : null;
+  }
   
   removeUser(): void {
     sessionStorage.removeItem(this.storageKey);
