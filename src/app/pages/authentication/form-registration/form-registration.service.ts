@@ -13,6 +13,6 @@ export class FormRegistrationService {
 
   signUp(formData: formData1 
   ): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/personal_account/registration`, formData);
+    return this.http.post(`${environment.apiUrl}/authUser/registration`, formData);
   }
 }

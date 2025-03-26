@@ -13,6 +13,6 @@ export class FormAuthorizathionService {
 
   signIn(formData: formData2 
   ): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/personal_account/user`, formData);
+    return this.http.post(`${environment.apiUrl}/authUser/auth`, formData);
   }
 }

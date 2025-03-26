@@ -34,76 +34,45 @@ export class FormUserComponent implements OnInit {
   
   ngOnInit(): void {
     this.formUserService.UpdatesTab$.subscribe((value => {
-      if(value == "personal")
-      {
-        this.currentUserService.getUser().subscribe(
-          (value) => {
-            this.login = value.user.login;
-            this.email = value.user.email;
-            sessionStorage.setItem('userLogin', this.login);
-            sessionStorage.setItem('userEmail', this.email);
-            console.log(this.login)
-            console.log(this.email)
-            this.formUserService.changeUpdate(" ")
-          },
-          (error) => {
-            console.log(error.error.message);
-          }
-        );
-      }
-      else
-      {
-        this.OnReceipt();
-      }
+      this.userProfileForm.patchValue({value})
     }));
+    if(!this.currentUserService.getUserSession())
+    {
+        this.OnReceipt()
+    }
+    else
+    {
+      const FlowUser = this.currentUserService.getUserSession()
+      this.userProfileForm.patchValue({FlowUser})
+      console.log(FlowUser)
+    }
   }
 
   OnReceipt()
   {
-    const storedLogin = sessionStorage.getItem('userLogin');
-    const storedEmail = sessionStorage.getItem('userEmail');
+    const storedUser = this.currentUserService.getUserSession();
 
-    if (storedLogin == null && storedEmail == null) {
+    if (!storedUser) {
       this.currentUserService.getUser().subscribe(
         (value) => {
-          this.login = value.user.login;
-          this.email = value.user.email;
-          sessionStorage.setItem('userLogin', this.login);
-          sessionStorage.setItem('userEmail', this.email);
-          console.log(this.login)
-          console.log(this.email)
-          
+          sessionStorage.setItem('user', value.user);
+          this.formUserService.changeUpdate(storedUser)
         },
         (error) => {
           console.log(error.error.message);
         }
       );   
     } 
-    else
-    {
-      this.login = storedLogin ?? '';
-      this.email = storedEmail ?? '';
-      console.log(this.login)
-      console.log(this.email)
-    }
   }
 
   OnUpdate()
   {
-    const formData3: any = {
-      login: this.userProfileForm.value.login,
-      email: this.userProfileForm.value.email,
-      lastname: this.userProfileForm.value.lastname,
-      firstname: this.userProfileForm.value.firstname,
-      middlename: this.userProfileForm.value.middlename,
-      phone: this.userProfileForm.value.phone,
-    };
-    this.currentUserService.updateUserData(formData3).subscribe((data: any) => {
+    this.currentUserService.updateUserData(this.userProfileForm.value).subscribe((data: any) => {
       this.currentUserService.getUser().subscribe({
         next: (data) => {
           this.currentUser = data.data2;
           this.currentUserService.saveUser(data.data2);
-          this.formUserService.changeUpdate("personal")
+          this.formUserService.changeUpdate(data.data2)
         },
         error: (error) => {
           console.log(error.error.message);
@@ -111,6 +80,4 @@ export class FormUserComponent implements OnInit {
       });
     })
   }
-
-
 }

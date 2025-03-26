@@ -9,7 +9,7 @@ import { formData3 } from '../interfaces/registration';
 })
 export class CurrentUserService {
 
-  private readonly storageKey = 'currentUser';
+  private readonly storageKey = 'user';
 
   constructor(private http: HttpClient) { }
 
@@ -40,20 +40,20 @@ export class CurrentUserService {
 
   deleteUser(): Observable<any> {
     return this.http
-      .delete<any>(`${environment.apiUrl}/personal_account/user`, {
+      .delete<any>(`${environment.apiUrl}/profile/`, {
         headers: this.getAuthHeaders(),
       })
   }
 
   getUser(): Observable<any> {
     return this.http
-      .get<any>(`${environment.apiUrl}/personal_account/user`, {
+      .get<any>(`${environment.apiUrl}/profile/`, {
         headers: this.getAuthHeaders(),
       })
   }
   updateUserData(user: formData3): Observable<any> {
       return this.http
-        .patch<any>(`${environment.apiUrl}/personal_account/user`, user, {
+        .patch<any>(`${environment.apiUrl}/profile/`, user, {
           headers: this.getAuthHeaders(),
         })
     }
