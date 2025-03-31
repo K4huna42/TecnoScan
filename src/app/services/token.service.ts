@@ -19,5 +19,9 @@ export class TokenService {
     localStorage.setItem('YXV0aFRva2Vu', token);
     this.authTokenSubject.next(true);
   }
+  getToken(): void {
+    localStorage.getItem('YXV0aFRva2Vu');
+    this.authTokenSubject.next(true);
+  }
 
 }

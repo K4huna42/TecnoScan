@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { CurrentUserService } from '../../services/current-user.service';
+import { TokenService } from '../../services/token.service';
 
 @Component({
   selector: 'app-personal-account',
@@ -12,7 +13,10 @@ import { CurrentUserService } from '../../services/current-user.service';
 })
 export class PersonalAccountComponent implements OnInit{
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private currentUserService: CurrentUserService) { }
+  constructor(private router: Router, 
+    private activatedRoute: ActivatedRoute, 
+    private currentUserService: CurrentUserService,
+    private tokenService: TokenService) { }
 
   menuItems: any = {
         home: { 
@@ -31,6 +35,7 @@ export class PersonalAccountComponent implements OnInit{
   };
 
   ngOnInit(): void {
+
   }
   
   executeCommand(commandName: string): void {

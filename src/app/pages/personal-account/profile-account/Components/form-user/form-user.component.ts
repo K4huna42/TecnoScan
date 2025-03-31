@@ -13,9 +13,7 @@ import { __values } from 'tslib';
 })
 export class FormUserComponent implements OnInit {
   
-  @Input() currentUser:any;
-  login: string = '';
-  email: string = '';
+  currentUser:any;
   hasUpdated: boolean = false;
   userProfileForm!: FormGroup;
 
@@ -33,19 +31,18 @@ export class FormUserComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.formUserService.UpdatesTab$.subscribe((value => {
-      this.userProfileForm.patchValue({value})
-    }));
-    if(!this.currentUserService.getUserSession())
-    {
-        this.OnReceipt()
-    }
-    else
-    {
-      const FlowUser = this.currentUserService.getUserSession()
-      this.userProfileForm.patchValue({FlowUser})
-      console.log(FlowUser)
-    }
+    this.OnReceipt()
+  }
+
+  patchValueData(data: any)
+  {
+    this.userProfileForm.patchValue({
+      login: data?.login,
+      email: data?.email,
+      lastname: data?.lastname,
+      firstname: data?.firstname,
+      middlename: data?.middlename,
+      phone: data?.phone,})
   }
 
   OnReceipt()
@@ -55,29 +52,29 @@ export class FormUserComponent implements OnInit {
     if (!storedUser) {
       this.currentUserService.getUser().subscribe(
         (value) => {
-          sessionStorage.setItem('user', value.user);
-          this.formUserService.changeUpdate(storedUser)
+          this.currentUserService.saveUser(value.user);
+          this.patchValueData(value.user)
+          console.log(value.user)
         },
         (error) => {
           console.log(error.error.message);
         }
       );   
+    }
+    else
+    {
+      const FlowUser = this.currentUserService.getUserSession()
+      this.patchValueData(FlowUser)
+      console.log(FlowUser.login)
     } 
   }
 
   OnUpdate()
   {
     this.currentUserService.updateUserData(this.userProfileForm.value).subscribe((data: any) => {
-      this.currentUserService.getUser().subscribe({
-        next: (data) => {
-          this.currentUser = data.data2;
-          this.currentUserService.saveUser(data.data2);
-          this.formUserService.changeUpdate(data.data2)
-        },
-        error: (error) => {
-          console.log(error.error.message);
-        }
-      });
+          this.currentUserService.saveUser(data.user);
+          this.formUserService.changeUpdate(data.user)
+          this.currentUser = data.user
     })
   }
 }

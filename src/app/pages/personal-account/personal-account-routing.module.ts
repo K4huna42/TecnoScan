@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { PersonalAccountComponent } from './personal-account.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {
     path: '', 
-    component: PersonalAccountComponent,
+    component: PersonalAccountComponent, canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -26,7 +27,7 @@ const routes: Routes = [
         loadChildren:() => import('./profile-account/profile-account.module').then(m => m.ProfileAccountModule) 
       }
     ]
-  }
+  },
 ]
 
 
@@ -35,4 +36,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 
-export class PersonalAccountRoutingModule { }
+export class PersonalAccountRoutingModule {
+ }
