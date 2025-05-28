@@ -7,7 +7,7 @@ import { AuthGuard } from './auth.guard';
 const routes: Routes = [
   {
     path: '', 
-    component: PersonalAccountComponent, canActivate: [AuthGuard],
+    component: PersonalAccountComponent,
     children: [
       {
         path: '',
@@ -16,7 +16,7 @@ const routes: Routes = [
       },
       {
         path: 'home', 
-        loadChildren:() => import('./home-account/home-account.module').then(m => m.HomeAccountModule) 
+        loadChildren:() => import('./home-account/home-account.module').then(m => m.HomeAccountModule)
       },
       {
         path: 'settings', 
@@ -25,7 +25,7 @@ const routes: Routes = [
       {
         path: 'profile', 
         loadChildren:() => import('./profile-account/profile-account.module').then(m => m.ProfileAccountModule) 
-      }
+      },
     ]
   },
 ]

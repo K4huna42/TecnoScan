@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PersonalAccountRoutingModule } from './personal-account-routing.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -8,7 +10,7 @@ import { PersonalAccountRoutingModule } from './personal-account-routing.module'
   declarations: [],
   imports: [
     CommonModule,
-    PersonalAccountRoutingModule
+    PersonalAccountRoutingModule,
   ]
 })
 export class PersonalAccountModule { }

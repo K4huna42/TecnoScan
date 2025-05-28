@@ -1,0 +1,16 @@
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;               // отступы между карточками
+  padding: 16px;
+}
+
+::ng-deep .custom-card {
+  border: 1px solid #ccc;  // чёткая рамка
+  border-radius: 6px;
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  box-shadow: none;        // убираем тень
+  background-color: #fff;
+}

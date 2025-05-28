@@ -15,13 +15,18 @@ export class TokenService {
     return !!localStorage.getItem('YXV0aFRva2Vu');
   }
 
-  setToken(token:string): void {
+  setToken(token: string): void {
     localStorage.setItem('YXV0aFRva2Vu', token);
     this.authTokenSubject.next(true);
   }
   getToken(): void {
     localStorage.getItem('YXV0aFRva2Vu');
     this.authTokenSubject.next(true);
+  }
+  getValueToken(): string {
+    const valueToken = localStorage.getItem('YXV0aFRva2Vu')
+
+    return valueToken ? valueToken : ""
   }
 
 }

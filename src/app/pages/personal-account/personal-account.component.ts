@@ -3,11 +3,14 @@ import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { CurrentUserService } from '../../services/current-user.service';
 import { TokenService } from '../../services/token.service';
+import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
+
 
 @Component({
   selector: 'app-personal-account',
   standalone: true,
-  imports: [RouterOutlet, ButtonModule],
+  imports: [RouterOutlet, ButtonModule, DialogModule, InputTextModule, ],
   templateUrl: './personal-account.component.html',
   styleUrl: './personal-account.component.scss'
 })
@@ -31,7 +34,7 @@ export class PersonalAccountComponent implements OnInit{
         exit:
         {
           action: () => this.executeCommand('exit') 
-        }
+        },
   };
 
   ngOnInit(): void {

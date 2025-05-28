@@ -1,0 +1,62 @@
+<p-button (click)="showDialog()" label="Cоздать карту авто" />
+<p-dialog header="Карта автомобиля" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+  <form [formGroup]="SendCarForm">
+    <span class="p-text-secondary block mb-8">Запишите необходимую информацию в полях.</span>
+    <div class="card flex justify-content-center">
+        <p-dropdown 
+          [options]="brands"
+          formControlName="brand_id"
+          optionLabel="name"
+          placeholder="Выберите марку">
+        </p-dropdown>
+      </div>
+    <div class="flex items-center gap-4 mb-8">
+        <label class="font-semibold w-24">Модель</label>
+        <input pInputText class="flex-auto" formControlName = "model" autocomplete="off" />
+    </div>
+    <div class="flex items-center gap-4 mb-8">
+        <label class="font-semibold w-24">год</label>
+        <input pInputText class="flex-auto" formControlName = "year" autocomplete="off" />
+    </div>
+    <div class="card flex justify-content-center">
+        <p-dropdown 
+          [options]="volumes"
+          formControlName="engine_volume"  
+          optionLabel="name" 
+          placeholder="Выберите объем">
+        </p-dropdown>
+      </div>
+      <div class="card flex justify-content-center">
+        <p-dropdown 
+          [options]="gears"  
+          formControlName="transmission_type_id"
+          optionLabel="name"
+          placeholder="Выберите трансмиссию">
+        </p-dropdown>
+      </div>
+    <div class="flex items-center gap-4 mb-8">
+        <label class="font-semibold w-24">Вин код</label>
+        <input pInputText class="flex-auto" formControlName = "vin_code" autocomplete="off" />
+    </div>
+    <div class="flex justify-end gap-2">
+        <p-button label="отмена" severity="secondary" (click)="visible = false"/>
+        <p-button label="создать" (click)="visible = false" (click) = "SendCar()" />
+    </div>
+  </form>
+</p-dialog>
+<div class="card-container">
+  <p-card
+    *ngFor="let car of cars"
+    header="{{ car.car_brand }} {{ car.model }}"
+    styleClass="custom-card">
+    <div class="p-2">
+      <p><strong>Год:</strong> {{ car.year }}</p>
+      <p><strong>Объём двигателя:</strong> {{ car.engine_vol }}</p>
+      <p><strong>КПП:</strong> {{ car.transmission_type }}</p>
+      <p><strong>VIN-код:</strong> {{ car.vin_code }}</p>
+    </div>
+  </p-card>
+</div>
+
+
+

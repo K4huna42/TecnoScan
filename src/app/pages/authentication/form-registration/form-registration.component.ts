@@ -20,7 +20,7 @@ import { CurrentUserService } from '../../../services/current-user.service';
 })
 export class FormRegistrationComponent implements OnInit {
 
-  SignUpForm!: FormGroup;
+  SignUpForm: FormGroup;
   
   constructor(private fb: FormBuilder, private formRegistrationService: FormRegistrationService, 
     private router: Router,
@@ -52,7 +52,9 @@ export class FormRegistrationComponent implements OnInit {
 
       this.formRegistrationService.signUp(data).subscribe(
         (value) => {
+            localStorage.setItem('VXNlcklk', value.id);
             this.tokenService.setToken(value.token);
+            console.log(value.token)
             this.router.navigate([`/${value.id}`]);
             
         },
