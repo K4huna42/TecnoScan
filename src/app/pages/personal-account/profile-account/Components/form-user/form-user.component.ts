@@ -65,12 +65,12 @@ export class FormUserComponent implements OnInit {
     {
       const FlowUser = this.currentUserService.getUserSession()
       this.patchValueData(FlowUser)
-      console.log(FlowUser.login)
     } 
   }
 
   OnUpdate()
   {
+    console.log(this.userProfileForm.value)
     this.currentUserService.updateUserData(this.userProfileForm.value).subscribe((data: any) => {
           this.currentUserService.saveUser(data.user);
           this.formUserService.changeUpdate(data.user)

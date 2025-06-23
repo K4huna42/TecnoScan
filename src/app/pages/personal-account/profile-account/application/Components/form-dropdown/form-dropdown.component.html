@@ -4,7 +4,7 @@
     <span class="p-text-secondary block mb-8">Запишите необходимую информацию в полях.</span>
     <div class="card flex justify-content-center">
         <p-dropdown 
-          [options]="brands"
+          [options]="loadValues.brands"
           formControlName="brand_id"
           optionLabel="name"
           placeholder="Выберите марку">
@@ -14,13 +14,17 @@
         <label class="font-semibold w-24">Модель</label>
         <input pInputText class="flex-auto" formControlName = "model" autocomplete="off" />
     </div>
-    <div class="flex items-center gap-4 mb-8">
-        <label class="font-semibold w-24">год</label>
-        <input pInputText class="flex-auto" formControlName = "year" autocomplete="off" />
+    <div class="card flex justify-content-center mb-8">
+      <p-dropdown 
+      [options]="years"
+      formControlName="year"
+      optionLabel="name"
+      placeholder="Выберите год">
+      </p-dropdown>
     </div>
     <div class="card flex justify-content-center">
         <p-dropdown 
-          [options]="volumes"
+          [options]="loadValues.volumes"
           formControlName="engine_volume"  
           optionLabel="name" 
           placeholder="Выберите объем">
@@ -28,7 +32,7 @@
       </div>
       <div class="card flex justify-content-center">
         <p-dropdown 
-          [options]="gears"  
+          [options]="loadValues.gears"  
           formControlName="transmission_type_id"
           optionLabel="name"
           placeholder="Выберите трансмиссию">
@@ -44,19 +48,3 @@
     </div>
   </form>
 </p-dialog>
-<div class="card-container">
-  <p-card
-    *ngFor="let car of cars"
-    header="{{ car.car_brand }} {{ car.model }}"
-    styleClass="custom-card">
-    <div class="p-2">
-      <p><strong>Год:</strong> {{ car.year }}</p>
-      <p><strong>Объём двигателя:</strong> {{ car.engine_vol }}</p>
-      <p><strong>КПП:</strong> {{ car.transmission_type }}</p>
-      <p><strong>VIN-код:</strong> {{ car.vin_code }}</p>
-    </div>
-  </p-card>
-</div>
-
-
-

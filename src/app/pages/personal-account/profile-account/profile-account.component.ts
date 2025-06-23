@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormDeleteComponent } from './Components/form-delete/form-delete.component';
 import { FormUserComponent } from './Components/form-user/form-user.component';
-import { ApplicationComponent } from '../application/application.component';
+import { ApplicationComponent } from './application/application.component';
 
 @Component({
   selector: 'app-profile-account',

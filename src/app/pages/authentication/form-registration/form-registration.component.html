@@ -1,32 +1,44 @@
 <form [formGroup]="SignUpForm" novalidate (keydown)="handleKeyDown($event)">
-    <h1>Регистрация</h1>
-    <div class="inputGroup">
-      <p-floatLabel>
-        <input pInputText id="login" formControlName="login" autocomplete="new-login" />
-        <label for="login">логин</label>
-      </p-floatLabel>
-      <br>
-      <p-floatLabel>
-        <input 
-        pInputText id="email" 
-        formControlName="email" 
-        autocomplete="new-email"
-        />
-        <label for="email">Электронная почта</label>
-      </p-floatLabel>
-      <br>
-      <p-floatLabel>
-        <input 
-        pInputText id="password" 
-        formControlName="password" 
-        autocomplete="new-password"
-        />
-        <label for="password">Пароль</label>
-      </p-floatLabel>
-      <br>
-      <button
-        (click)="onSignUp()">
-        Зарегистрироваться
-      </button>
+  <h1>Регистрация</h1>
+  <div class="inputGroup">
+    <p-floatLabel>
+      <input pInputText id="login" formControlName="login" autocomplete="new-login" />
+      <label for="login">логин</label>
+    </p-floatLabel>
+    <div *ngIf="SignUpForm.get('login')?.touched && SignUpForm.get('login')?.invalid">
+      <small *ngIf="SignUpForm.get('login')?.errors?.['required']">
+        Поле обязательно
+      </small>
+      <small *ngIf="SignUpForm.get('login')?.errors?.['englishLettersOnly']">
+        Допустимы только английские буквы и цифры
+      </small>
+      <small *ngIf="SignUpForm.get('login')?.errors?.['noSpacesAllowed']">
+        Пробелы недопустимы
+      </small>
     </div>
+    <br>
+    <p-floatLabel>
+      <input pInputText id="email" formControlName="email" autocomplete="new-email" />
+      <label for="email">Электронная почта</label>
+    </p-floatLabel>
+    <div *ngIf="SignUpForm.get('email')?.touched && SignUpForm.get('email')?.invalid">
+      <small *ngIf="SignUpForm.get('email')?.errors?.['required']">Поле обязательно</small>
+      <small *ngIf="SignUpForm.get('email')?.errors?.['noSpacesAllowed']">Пробелы недопустимы</small>
+    </div>
+    <br>
+    <p-floatLabel>
+      <input pInputText id="password" formControlName="password" autocomplete="new-password" />
+      <label for="password">Пароль</label>
+    </p-floatLabel>
+    <div *ngIf="SignUpForm.get('password')?.touched && SignUpForm.get('password')?.invalid">
+      <small *ngIf="SignUpForm.get('password')?.errors?.['required']">Поле обязательно</small>
+      <small *ngIf="SignUpForm.get('password')?.errors?.['englishLettersOnly']">Допустимы только английские буквы и
+        цифры</small>
+      <small *ngIf="SignUpForm.get('password')?.errors?.['noSpacesAllowed']">Пробелы недопустимы</small>
+    </div>
+    <br>
+    <button (click)="onSignUp()">
+      Зарегистрироваться
+    </button>
+  </div>
 </form>

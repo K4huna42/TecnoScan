@@ -1,0 +1,13 @@
+<div class="card-container">
+  <p-card
+    *ngFor="let car of cars"
+    header="{{ car.car_brand.name }} {{ car.model }}"
+    styleClass="custom-card">
+    <div class="p-2">
+      <p><strong>Год:</strong> {{ car.year }}</p>
+      <p><strong>Объём двигателя:</strong> {{ car.engine_vol.name }}</p>
+      <p><strong>КПП:</strong> {{ car.transmission_type.name }}</p>
+      <p><strong>VIN-код:</strong> {{ car.vin_code }}</p>
+    </div>
+  </p-card>
+</div>

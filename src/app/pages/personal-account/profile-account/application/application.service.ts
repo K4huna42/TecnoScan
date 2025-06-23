@@ -1,9 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { FormCard } from '../../../interfaces/card';
-import { CarId } from '../../../interfaces/card';
-import { environment } from '../../../../environment';
+import { FormCard } from '../../../../interfaces/card';
+import { CarId } from '../../../../interfaces/card';
+import { environment } from '../../../../../environment';
 
 @Injectable({
   providedIn: 'root'

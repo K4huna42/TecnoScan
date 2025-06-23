@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeAccountRoutingModule } from './home-account-routing.module';
-import { ApplicationComponent } from '../application/application.component';
+import { ApplicationComponent } from '../profile-account/application/application.component';
 
 
 
